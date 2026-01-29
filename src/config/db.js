@@ -5,11 +5,15 @@ const pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
+  port: process.env.DB_PORT,   // 🔥 ADD THIS LINE
   waitForConnections: true,
   connectionLimit: 10
 });
-
 module.exports = pool;
+const mysql = require('mysql2/promise');
+
+
+
 pool.getConnection()
   .then(conn => {
     console.log("✅ Database connected successfully");
@@ -18,3 +22,5 @@ pool.getConnection()
   .catch(err => {
     console.error("❌ Database connection failed:", err.message);
   });
+
+module.exports = pool;
